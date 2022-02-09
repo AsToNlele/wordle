@@ -78,7 +78,7 @@ function checkWord() {
 			else {
 				colorArr[row][index] = "gray"
 				letterArr[row].forEach((letter2,index2) => {
-					if(solLetter === letter2){
+					if(solLetter === letter2 && colorArr[row][index2] !== "green"){
 						console.log(solLetter + " equals " + letter2)
 						colorArr[row][index2] = "orange"
 					}
