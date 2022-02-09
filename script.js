@@ -16,10 +16,7 @@ document.addEventListener("keydown", handleKey)
 
 async function start() {
 	solutions = await fetch("solutions.json").then(data => data.json())
-	console.log(solutions)
 	let randomNum = Math.floor(Math.random() * solutions.length)
-	console.log(randomNum)
-	console.log(solutions[randomNum])
 	solution = solutions[randomNum]
 	solution = solution.toUpperCase()
 	solutionArr = solution.split('')
@@ -34,10 +31,10 @@ function drawField() {
 		for (let j = 0; j < 5; j++) {
 			let el = document.createElement("div")
 			el.style.position = "absolute"
-			el.style.top = i * 80 + "px"
-			el.style.left = j * 80 + "px"
-			el.style.height = "80px"
-			el.style.width = "80px"
+			el.style.top = i * 60 + "px"
+			el.style.left = j * 60 + "px"
+			el.style.height = "60px"
+			el.style.width = "60px"
 			el.style.backgroundColor = colorArr[i][j]
 			el.style.border = "1px solid black"
 			gameEl.appendChild(el)
@@ -50,12 +47,10 @@ function handleKey(e) {
 		col++
 		let letter = e.key.toUpperCase()
 		letterArr[row][col] = letter
-		console.log(letterArr[row][col])
 		render()
 	}
 
 	else if (e.key == "Enter" && col === 4) {
-		console.log(letterArr)
 		checkWord()
 	}
 
@@ -79,7 +74,6 @@ function checkWord() {
 				colorArr[row][index] = "gray"
 				letterArr[row].forEach((letter2,index2) => {
 					if(solLetter === letter2 && colorArr[row][index2] !== "green"){
-						console.log(solLetter + " equals " + letter2)
 						colorArr[row][index2] = "orange"
 					}
 				})
@@ -88,12 +82,12 @@ function checkWord() {
 		if(count === 5){
 			console.log("you win")
 			finished = true
-			statusEl.innerText = "GOD GAMER"
+			statusEl.innerHTML = "<span color='blue'>GOD GAMER</span>"
 		}
 		else if(row === 5){
 			console.log("you lose")
 			finished = true
-			statusEl.innerText = "SO BAD"
+			statusEl.innerHTML = "<span color='red'>SO BAD</span>"
 		} else {
 			row++
 			col = -1
@@ -112,9 +106,9 @@ function render() {
 			let el = document.createElement("span")
 			el.innerText = letterArr[i][j]
 			el.style.position = "absolute"
-			el.style.top = i * 80 + 20 + "px"
-			el.style.left = j * 80 + 20 + "px"
-			el.style.fontSize = "40px"
+			el.style.top = i * 60 + 15 + "px"
+			el.style.left = j * 60 + 15 + "px"
+			el.style.fontSize = "30px"
 			gameEl.appendChild(el)
 		}
 	}
